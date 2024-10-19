@@ -1,15 +1,20 @@
 from groq import Groq
 import base64
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def encode_image(image_path):
-  with open(image_path, "rb") as image_file:
-    return base64.b64encode(image_file.read()).decode('utf-8')
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
 
 image_path = "medical.png"
-
 base64_image = encode_image(image_path)
 
-client = Groq()
+client = Groq(api_key=GROQ_API_KEY)
 
 chat_completion = client.chat.completions.create(
     messages=[

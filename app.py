@@ -6,6 +6,7 @@ import os
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+MODEL_NAME = "llava-v1.5-7b-4096-preview"
 
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
@@ -31,7 +32,7 @@ chat_completion = client.chat.completions.create(
             ],
         }
     ],
-    model="llava-v1.5-7b-4096-preview",
+    model=MODEL_NAME,
 )
 
 print(chat_completion.choices[0].message.content)
